@@ -1,0 +1,249 @@
+{
+  "info": {
+    "name": "Changelog App API",
+    "description": "API collection for the Changelog Product Updates Widget",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5001/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@changelog.com\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public Changelog",
+      "item": [
+        {
+          "name": "Get Published Changelogs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs"]
+            }
+          }
+        },
+        {
+          "name": "Search Changelogs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs?search=version",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "version"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter By Category",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs?category=New",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "New"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "JSON Feed",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/v1/changelog/feed",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "changelog", "feed"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Changelog",
+      "item": [
+        {
+          "name": "Get All Changelogs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs/admin/all",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs", "admin", "all"]
+            }
+          }
+        },
+        {
+          "name": "Create Changelog",
+          "request": {
+            "method": "POST",
+            "header": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Version 2.0 is here\",\n  \"slug\": \"version-2-0-is-here\",\n  \"contentMarkdown\": \"## What's new\\n\\n- New dashboard\\n- Faster performance\",\n  \"category\": \"New\",\n  \"coverImage\": \"https://example.com/image.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/changelogs/admin",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs", "admin"]
+            }
+          }
+        },
+        {
+          "name": "Publish Changelog",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs/admin/CHANGELOG_ID/publish",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs", "admin", "CHANGELOG_ID", "publish"]
+            }
+          }
+        },
+        {
+          "name": "Update Changelog",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs/admin/CHANGELOG_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs", "admin", "CHANGELOG_ID"]
+            }
+          }
+        },
+        {
+          "name": "Delete Changelog",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/changelogs/admin/CHANGELOG_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs", "admin", "CHANGELOG_ID"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reactions",
+      "item": [
+        {
+          "name": "React To Changelog",
+          "request": {
+            "method": "POST",
+            "header": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"heart\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/changelogs/CHANGELOG_ID/reaction",
+              "host": ["{{baseUrl}}"],
+              "path": ["changelogs", "CHANGELOG_ID", "reaction"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/notifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications"]
+            }
+          }
+        },
+        {
+          "name": "Unread Count",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/notifications/unread-count",
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications", "unread-count"]
+            }
+          }
+        },
+        {
+          "name": "Mark All As Read",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{baseUrl}}/notifications/read-all",
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications", "read-all"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
